@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Meme Commentor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    input[type="file"] {
+      margin: 20px 0;
+    }
+
+    #memePreview {
+      position: relative;
+      display: inline-block;
+    }
+
+    #memeImage {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    #caption {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-weight: bold;
+      background: rgba(0,0,0,0.6);
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 90%;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Meme Commentor</h1>
+    <input type="file" id="imageInput" accept="image/*">
+    <div id="memePreview">
+      <img id="memeImage" src="" alt="">
+      <p id="caption"></p>
+    </div>
+    <button onclick="generateCaption()">Generate Caption</button>
+  </div>
+
+  <script>
+    const imageInput = document.getElementById("imageInput");
+    const memeImage = document.getElementById("memeImage");
+    const caption = document.getElementById("caption");
+
+    const funnyCaptions = [
+      "When you open the fridge for the 10th time and still find nothing new.",
+      "Me pretending to work while actually just moving my mouse.",
+      "When you realize adulthood is just one long ‘low battery’ warning.",
+      "POV: You clicked ‘Reply All’ by mistake.",
+      "Me trying to look busy when the boss walks in.",
+      "This is fine. Everything is fine.",
+      "When your code works on the first try and you don’t know why.",
+      "Me calculating how many hours of sleep I can get if I watch one more episode.",
+      "That moment when you realize the assignment was due yesterday.",
+      "Trying to act normal after coffee kicks in."
+    ];
+
+    imageInput.addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          memeImage.src = e.target.result;
+          caption.textContent = "";
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function generateCaption() {
+      const randomIndex = Math.floor(Math.random() * funnyCaptions.length);
+      caption.textContent = funnyCaptions[randomIndex];
+    }
+  </script>
+</body>
+</html>
